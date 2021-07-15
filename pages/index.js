@@ -3,6 +3,8 @@ import Box from "../src/components/Box";
 import MainGrid from "../src/components/MainGrid";
 import { AlurakutMenu, OrkutNostalgicIconSet, AlurakutProfileSidebarMenuDefault } from '../src/lib/AlurakutCommons';
 import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelations';
+import { ProfileFriends } from '../src/components/ProfileFriends';
+import { ProfileCommunity } from '../src/components/ProfileCommunity';
 
 function ProfileSidebar(props){
   return (
@@ -28,8 +30,14 @@ export default function Home() {
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
   const [communities, setCommunities] = useState([{
-    title: 'Eu odeio acordar cedo',
-    image: 'https://alurakut.vercel.app/capa-comunidade-01.jpg'
+    title: 'CollabCodeTech',
+    image: 'https://github.com/CollabCodeTech.png',
+    link: 'http://bit.ly/discord-collabcode'
+  },
+  {
+    title: 'He4rt Devs',
+    image: 'https://github.com/he4rt.png',
+    link: 'https://heartdevs.com'
   }]);
 
   useEffect(() => {
@@ -56,7 +64,8 @@ export default function Home() {
 
     const community = {
       'title': data.get('title'),
-      'image': data.get('image')
+      'image': data.get('image'),
+      'link': data.get('link')
     }
 
     setCommunities([...communities, community]);
@@ -93,9 +102,17 @@ export default function Home() {
                   placeholder="Coloque uma URL para usarmos de capa" 
                   name ="image" 
                   aria-label="Coloque uma URL para usarmos de capa"
+                  type="text"
                 />
               </div>
-
+              <div>
+                <input 
+                  placeholder="Qual o link para sua comunidade?" 
+                  name ="link" 
+                  aria-label="Qual o link para sua comunidade?"
+                  type="text"
+                />
+              </div>
               <button>
                 Criar comunidade
               </button>
@@ -104,64 +121,22 @@ export default function Home() {
         </div>
         <div className="profileRelationsArea" style={{gridArea: 'profileRelationsArea'}}>
           <ProfileRelationsBoxWrapper>
-            <h2 className="smallTitle">
-              Meus amigos ({followers.length})
-            </h2>
-
-            <ul>
-              {followers.map((itemAtual, index) => {
-                if(index <= 5){
-                  return (
-                    <li key={index}>
-                      <a href={`${itemAtual.html_url}`}>
-                        <img src={`https://github.com/${itemAtual.login}.png`} />
-                        <span>{itemAtual.login}</span>
-                      </a>
-                    </li>
-                  )
-                }
-              })}
-            </ul>
+            <ProfileFriends 
+              title="Meus amigos"
+              list={followers}
+            />
           </ProfileRelationsBoxWrapper>
           <ProfileRelationsBoxWrapper>
-            <h2 className="smallTitle">
-              Seguindo ({following.length})
-            </h2>
-
-            <ul>
-              {following.map((itemAtual, index) => {
-                if(index <= 5){
-                  return (
-                    <li key={index}>
-                      <a href={`${itemAtual.html_url}`}>
-                        <img src={`https://github.com/${itemAtual.login}.png`} />
-                        <span>{itemAtual.login}</span>
-                      </a>
-                    </li>
-                  )
-                }
-              })}
-            </ul>
+            <ProfileFriends 
+              title="Seguindo"
+              list={following}
+            />
           </ProfileRelationsBoxWrapper>
           <ProfileRelationsBoxWrapper>
-            <h2 className="smallTitle">
-              Comunidades ({communities.length})
-            </h2>
-
-            <ul>
-              {communities.map((itemAtual, index) => {
-                if(index <= 5){
-                  return (
-                    <li key={index}>
-                      <a href={`community/${itemAtual.title}`}>
-                        <img src={itemAtual.image} />
-                        <span>{itemAtual.title}</span>
-                      </a>
-                    </li>
-                  )
-                }
-              })}
-            </ul>
+            <ProfileCommunity
+              title="Comunidades"
+              list={communities}
+            />
           </ProfileRelationsBoxWrapper>
         </div>
       </MainGrid>
