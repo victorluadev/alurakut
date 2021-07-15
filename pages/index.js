@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
+import { AlurakutMenu, OrkutNostalgicIconSet, AlurakutProfileSidebarMenuDefault } from '../src/lib/AlurakutCommons';
 import Box from "../src/components/Box";
 import MainGrid from "../src/components/MainGrid";
-import { AlurakutMenu, OrkutNostalgicIconSet, AlurakutProfileSidebarMenuDefault } from '../src/lib/AlurakutCommons';
 import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelations';
 import { ProfileFriends } from '../src/components/ProfileFriends';
 import { ProfileCommunity } from '../src/components/ProfileCommunity';
@@ -37,7 +37,12 @@ export default function Home() {
   {
     title: 'He4rt Devs',
     image: 'https://github.com/he4rt.png',
-    link: 'https://heartdevs.com'
+    link: 'https://discord.com/invite/5kwDQuv'
+  },
+  {
+    title: 'Accenture',
+    image: 'https://github.com/Accenture.png',
+    link: 'https://www.accenture.com/br-pt'
   }]);
 
   useEffect(() => {
