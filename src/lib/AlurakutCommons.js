@@ -399,6 +399,11 @@ const AlurakutLoginScreen = css`
         background-color: var(--backgroundSecondary);
         border-radius: var(--commonRadius);
         flex: 1;
+        p {
+           strong {
+            color: var(--colorQuarternary);
+          }
+        }
         &:not(:last-child) {
           margin-bottom: var(--gap);
         }

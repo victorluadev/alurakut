@@ -4,7 +4,7 @@ export function ProfileCommunity({ title, list }) {
   return (
     <>
       <h2 className="smallTitle">
-        {title} ({list.length === 0 ? 'Carregando...' : list.length })
+        {title} ({ list.length === 0 ? '0' : list.length })
       </h2>
 
       <ul>

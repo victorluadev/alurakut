@@ -67,7 +67,6 @@ export default function Home(props) {
 
   function handleOnSubmit(e){
     e.preventDefault();
-    console.log(e)
 
     const formData = new FormData(e.target);
 
@@ -143,7 +142,7 @@ export default function Home(props) {
         <div className="profileRelationsArea" style={{gridArea: 'profileRelationsArea'}}>
           <ProfileRelationsBoxWrapper>
             <ProfileFriends 
-              title="Meus amigos"
+              title="Seguidores"
               list={followers}
             />
           </ProfileRelationsBoxWrapper>
@@ -168,6 +167,7 @@ export default function Home(props) {
 export async function getServerSideProps(ctx) {
   const cookies = nookies.get(ctx)
   const token = cookies.USER_TOKEN;
+
   const { isAuthenticated } = await fetch('https://alurakut.vercel.app/api/auth', {
     headers: {
         Authorization: token
@@ -176,6 +176,9 @@ export async function getServerSideProps(ctx) {
   .then((response) => response.json())
 
   if(!isAuthenticated) {
+
+    nookies.destroy(ctx, 'USER_TOKEN');
+
     return {
       redirect: {
         destination: '/login',

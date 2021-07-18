@@ -1,10 +1,11 @@
 import React from 'react';
+import Loading from '../Loading';
 
 export function ProfileFriends({ title, list }) {
   return (
     <>
       <h2 className="smallTitle">
-        {title} ({list.length === 0 ? 'Carregando...' : list.length })
+        {title} ({list.length === 0 ? <Loading /> : list.length })
       </h2>
 
       <ul>

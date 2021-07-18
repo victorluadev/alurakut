@@ -20,26 +20,26 @@ export default function LoginPage() {
 
         <section className="formArea">
           <form className="box" onSubmit={(e) => {
-                e.preventDefault();
-                fetch('https://alurakut.vercel.app/api/login', {
-                    method: 'POST',
-                    headers: {
-                       'Content-Type': 'application/json'  
-                    },
-                    body: JSON.stringify({ githubUser: githubUser })
+            e.preventDefault();
+            fetch('https://alurakut.vercel.app/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'  
+                },
+                body: JSON.stringify({ githubUser: githubUser })
+            })
+            .then(async (response) => {
+                const data = await response.json()
+                const token = data.token;
+                nookies.set(null, 'USER_TOKEN', token, {
+                    path: '/',
+                    maxAge: 3600 
                 })
-                .then(async (response) => {
-                    const data = await response.json()
-                    const token = data.token;
-                    nookies.set(null, 'USER_TOKEN', token, {
-                        path: '/',
-                        maxAge: 3600 
-                    })
-                    router.push('/')
-                })
+                router.push('/')
+            })
           }}>
-            <p>
-              Acesse agora mesmo com seu usuário do <strong>GitHub</strong>!
+          <p>
+            Acesse agora mesmo com seu usuário do <strong>GitHub</strong>!
           </p>
             <input
                 placeholder="Usuário"

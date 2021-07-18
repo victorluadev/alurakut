@@ -26,7 +26,6 @@ export default async function ResquestReceiver(request, response){
     const client = new SiteClient(process.env.API_TOKEN);
 
     const { user } = request.query;
-    console.log(user)
 
     const records = await client.items.all({
       filter: {
