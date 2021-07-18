@@ -25,9 +25,18 @@ export default async function ResquestReceiver(request, response){
   if(request.method === 'GET'){
     const client = new SiteClient(process.env.API_TOKEN);
 
+    const { user } = request.query;
+    console.log(user)
+
     const records = await client.items.all({
-      nested: 'true',
-      version: 'published'
+      filter: {
+        type: "community",
+        fields: {
+          owner: {
+            eq: user,
+          },
+        },
+      },
     });
   
     response.json({

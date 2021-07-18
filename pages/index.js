@@ -48,7 +48,7 @@ export default function Home(props) {
     }
 
     async function handleLoadCommunities() {
-      await fetch(`api/communities/`, {
+      await fetch(`api/communities?user=${githubUser}`, {
         method:"GET",
         headers: {
           'Content-Type': 'application/json'
