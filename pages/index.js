@@ -29,21 +29,7 @@ export default function Home() {
 
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
-  const [communities, setCommunities] = useState([{
-    title: 'CollabCodeTech',
-    image: 'https://github.com/CollabCodeTech.png',
-    link: 'http://bit.ly/discord-collabcode'
-  },
-  {
-    title: 'He4rt Devs',
-    image: 'https://github.com/he4rt.png',
-    link: 'https://discord.com/invite/5kwDQuv'
-  },
-  {
-    title: 'Accenture',
-    image: 'https://github.com/Accenture.png',
-    link: 'https://www.accenture.com/br-pt'
-  }]);
+  const [communities, setCommunities] = useState([]);
 
   useEffect(() => {
     async function handleLoadFollowers() {
@@ -58,22 +44,59 @@ export default function Home() {
       .catch(err => console.log(err));
     }
 
+    async function handleLoadCommunities() {
+      await fetch('https://graphql.datocms.com/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `4fb0f5565b9b95629d46026087286f`,
+        },
+        body: JSON.stringify({
+          'query': `{ 
+            allCommunities {
+              id
+              title
+              image
+              link
+            } 
+          }`
+        }),
+      })
+      .then(response => response.json())
+      .then(response => setCommunities(response.data.allCommunities))
+      .catch(err => console.log(err));
+    }
+
     handleLoadFollowers();
+    handleLoadCommunities();
   }, []);
 
   function handleOnSubmit(e){
     e.preventDefault();
     console.log(e)
 
-    const data = new FormData(e.target);
+    const formData = new FormData(e.target);
 
     const community = {
-      'title': data.get('title'),
-      'image': data.get('image'),
-      'link': data.get('link')
+      'title': formData.get('title'),
+      'image': formData.get('image'),
+      'link': formData.get('link'),
+      'owner': githubUser
     }
 
-    setCommunities([...communities, community]);
+    fetch('/api/communities', {
+      method:"POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(community)
+    },
+    ).then(async response => {
+      const data = await response.json();
+      setCommunities([...communities, data.community]);
+    })
+
   }
 
   return (

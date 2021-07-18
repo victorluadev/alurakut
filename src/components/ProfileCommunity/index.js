@@ -11,8 +11,8 @@ export function ProfileCommunity({ title, list }) {
         {list.map((item, index) => {
           if(index <= 5){
             return (
-              <li key={index}>
-                <a href={item.link}>
+              <li key={item.id}>
+                <a href={item.link.length ? item.link : '/404'}>
                   <img src={item.image} />
                   <span>{item.title}</span>
                 </a>
