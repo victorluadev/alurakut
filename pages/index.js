@@ -6,6 +6,9 @@ import { ProfileCommunity } from '../src/components/ProfileCommunity';
 import Box from "../src/components/Box";
 import MainGrid from "../src/components/MainGrid";
 
+import nookies from 'nookies';
+import jwt from 'jsonwebtoken';
+
 function ProfileSidebar(props){
   return (
     <Box as="aside">
@@ -24,8 +27,8 @@ function ProfileSidebar(props){
   )
 }
 
-export default function Home() {
-  const githubUser = 'victorluadev';
+export default function Home(props) {
+  const githubUser = props.githubUser;
 
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
@@ -45,7 +48,7 @@ export default function Home() {
     }
 
     async function handleLoadCommunities() {
-      await fetch('api/communities', {
+      await fetch(`api/communities/`, {
         method:"GET",
         headers: {
           'Content-Type': 'application/json'
@@ -99,7 +102,7 @@ export default function Home() {
         <div className="welcomeArea" style={{gridArea: 'welcomeArea'}}>
           <Box>
             <h1 className="title">
-              Bem vindo(a)
+              Bem vindo(a), {githubUser}
             </h1>
 
             <OrkutNostalgicIconSet recados="7" fotos="2" videos="7" fas="9" mensagens="4" confiavel="3" legal="3" sexy="2"/>
@@ -160,4 +163,31 @@ export default function Home() {
       </MainGrid>
     </>
   )
+}
+
+export async function getServerSideProps(ctx) {
+  const cookies = nookies.get(ctx)
+  const token = cookies.USER_TOKEN;
+  const { isAuthenticated } = await fetch('https://alurakut.vercel.app/api/auth', {
+    headers: {
+        Authorization: token
+      }
+  })
+  .then((response) => response.json())
+
+  if(!isAuthenticated) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      }
+    }
+  }
+
+  const { githubUser } = jwt.decode(token);
+  return {
+    props: {
+      githubUser
+    }, 
+  }
 }
