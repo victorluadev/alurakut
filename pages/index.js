@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { AlurakutMenu, OrkutNostalgicIconSet, AlurakutProfileSidebarMenuDefault } from '../src/lib/AlurakutCommons';
-import Box from "../src/components/Box";
-import MainGrid from "../src/components/MainGrid";
 import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelations';
 import { ProfileFriends } from '../src/components/ProfileFriends';
 import { ProfileCommunity } from '../src/components/ProfileCommunity';
+import Box from "../src/components/Box";
+import MainGrid from "../src/components/MainGrid";
 
 function ProfileSidebar(props){
   return (
@@ -45,26 +45,16 @@ export default function Home() {
     }
 
     async function handleLoadCommunities() {
-      await fetch('https://graphql.datocms.com/', {
-        method: 'POST',
+      await fetch('api/communities', {
+        method:"GET",
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `4fb0f5565b9b95629d46026087286f`,
-        },
-        body: JSON.stringify({
-          'query': `{ 
-            allCommunities {
-              id
-              title
-              image
-              link
-            } 
-          }`
-        }),
+          'Content-Type': 'application/json'
+        }
       })
-      .then(response => response.json())
-      .then(response => setCommunities(response.data.allCommunities))
+      .then(async response => {
+        const data = await response.json();
+        setCommunities(data.records);
+      })
       .catch(err => console.log(err));
     }
 
