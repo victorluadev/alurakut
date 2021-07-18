@@ -17,7 +17,7 @@
   
   | Repositório | Projeto |
   | --- | --- |
-  | [<img width='500px' src='https://opengraph.githubassets.com/cf9f1db04b6e4e2b7a984902d69b889f717d09cb94b8b4296ffffc16d0c73120/victorluadev/alurakut'/>](https://github.com/victorluadev/alurakut) | [<img width='500px' src='https://gerador-de-imagens-omariosouto-alura-challenges.vercel.app/api/image-generator?url=https://alurakut-three-weld.vercel.app/&v=2'/>](https://alurakut-three-weld.vercel.app/) |
+  | [<img width='500px' src='https://opengraph.githubassets.com/cf9f1db04b6e4e2b7a984902d69b889f717d09cb94b8b4296ffffc16d0c73120/victorluadev/alurakut'/>](https://github.com/victorluadev/alurakut) | [<img width='500px' src='https://gerador-de-imagens-omariosouto-alura-challenges.vercel.app/api/image-generator?url=https://alurakut-three-weld.vercel.app/&v=2'/>](https://alurakut-victorluadev.vercel.app/) |
 
 
 ## Tecnologias 🚀
@@ -26,6 +26,7 @@ Projeto desenvolvido com:
 - [React](https://pt-br.reactjs.org/)
 - [Next.js](https://nextjs.org/)
 - [styled-components](https://styled-components.com/)
+- [DatoCMS](https://www.datocms.com/)
 
 ## Primeiros passos ✨
 
@@ -36,8 +37,11 @@ $ git clone https://github.com/victorluadev/alurakut.git && cd alurakut
 # Instale as dependências do projeto
 $ yarn
 
-# Executando a aplicação (localmente)
+# Executando a aplicação
 $ yarn dev
+
+# OBS.: Configure as variaveis de ambiente com suas chaves
+# para isso, crie um arquivo na raiz do seu projeto com o nome `.env` e configure as suas chaves
 ```
 
 Acesse http://localhost:3000/ para ver a aplicação sendo executada.
