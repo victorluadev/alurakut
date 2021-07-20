@@ -15,20 +15,13 @@
   <h2 align="center"> Projeto desenvolvido durante a Imersão React #3 </h2>
 </p>
   
-  | Repositório | Projeto |
-  | --- | --- |
-  | [<img width='500px' src='https://opengraph.githubassets.com/cf9f1db04b6e4e2b7a984902d69b889f717d09cb94b8b4296ffffc16d0c73120/victorluadev/alurakut'/>](https://github.com/victorluadev/alurakut) | [<img width='500px' src='https://gerador-de-imagens-omariosouto-alura-challenges.vercel.app/api/image-generator?url=https://alurakut-three-weld.vercel.app/&v=2'/>](https://alurakut-victorluadev.vercel.app/) |
-
-
 ## Tecnologias 🚀
-Projeto desenvolvido com:
-
 - [React](https://pt-br.reactjs.org/)
 - [Next.js](https://nextjs.org/)
 - [styled-components](https://styled-components.com/)
 - [DatoCMS](https://www.datocms.com/)
 
-## Primeiros passos ✨
+## Primeiros Passos ✨
 
 ```bash
 # Clone o repositório
@@ -40,11 +33,24 @@ $ yarn
 # Executando a aplicação
 $ yarn dev
 
-# OBS.: Configure as variaveis de ambiente com suas chaves
-# para isso, crie um arquivo na raiz do seu projeto com o nome `.env` e configure as suas chaves
+# OBS: Configure as variaveis de ambiente com suas chaves
 ```
-
 Acesse http://localhost:3000/ para ver a aplicação sendo executada.
+
+## Variáveis de Ambiente 🗃
+
+Para executar o projeto corretamente, é necessário configurar as variáveis de ambiente
+
+1. Crie um arquivo `.env` na raiz do seu projeto
+2. Crie as seguintes chaves e siga os passos a baixo
+
+```
+API_TOKEN  = <Chave para acesso read-only ao DatoCMS>
+FULL_TOKEN = <Chave para acesso total ao DatoCMS>
+
+MODEL_ID_SCRAP     = <Model ID do modelo de scrap>
+MODEL_ID_COMMUNITY = <Model ID do modelo de comunidade>
+```
 
 ## Como Contribuir 📝
 
