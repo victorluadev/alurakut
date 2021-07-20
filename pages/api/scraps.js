@@ -5,18 +5,16 @@ export default async function ResquestReceiver(request, response){
   if(request.method === 'POST') {
     const client = new SiteClient(process.env.FULL_TOKEN);
 
-    const { title, image, link, owner } = request.body;
+    const { github_user, message } = request.body;
 
-    const community = await client.items.create({
-      itemType: process.env.MODEL_ID_COMMUNITY,
-      title,
-      image,
-      link,
-      owner,
+    const scrap = await client.items.create({
+      itemType: process.env.MODEL_ID_SCRAP,
+      github_user,
+      message,
     });
   
     response.json({
-      community: community
+      scrap: scrap
     });
 
     return;
@@ -25,17 +23,10 @@ export default async function ResquestReceiver(request, response){
   if(request.method === 'GET'){
     const client = new SiteClient(process.env.API_TOKEN);
 
-    const { user } = request.query;
-
     const records = await client.items.all({
-      filter: {
-        type: "community",
-        fields: {
-          owner: {
-            eq: user,
-          },
-        },
-      },
+      nested: 'true',
+      'filter[type]': 'scrap',
+      version: 'published'
     });
   
     response.json({

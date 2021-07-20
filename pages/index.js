@@ -5,6 +5,8 @@ import { ProfileFriends } from '../src/components/ProfileFriends';
 import { ProfileCommunity } from '../src/components/ProfileCommunity';
 import Box from "../src/components/Box";
 import MainGrid from "../src/components/MainGrid";
+import ScrapSection from "../src/components/ScrapSection";
+
 
 import nookies from 'nookies';
 import jwt from 'jsonwebtoken';
@@ -138,6 +140,7 @@ export default function Home(props) {
               </button>
             </form>
           </Box>
+          <ScrapSection />
         </div>
         <div className="profileRelationsArea" style={{gridArea: 'profileRelationsArea'}}>
           <ProfileRelationsBoxWrapper>

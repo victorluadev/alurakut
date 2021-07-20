@@ -54,6 +54,13 @@ button {
   border-radius: 10000px;
   background-color: ${({ theme }) => theme.colors.primaryElement};
 }
+span.count {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 17px;
+  color: ${({ theme }) => theme.colors.primaryText};
+}
 `;
 
 export default Box;

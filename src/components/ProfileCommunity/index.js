@@ -4,7 +4,7 @@ export function ProfileCommunity({ title, list }) {
   return (
     <>
       <h2 className="smallTitle">
-        {title} ({ list.length === 0 ? '0' : list.length })
+        {title} <span className="count">({ list.length === 0 ? '0' : list.length })</span>
       </h2>
 
       <ul>

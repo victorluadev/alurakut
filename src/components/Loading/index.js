@@ -13,7 +13,8 @@ export default function Loading() {
     
       <Lottie 
         style={{display: "inline-block"}}
-	      options={defaultOptions}
+        options={defaultOptions}
+        isClickToPauseDisabled
         height={14}
         width={22}
       />

@@ -5,7 +5,7 @@ export function ProfileFriends({ title, list }) {
   return (
     <>
       <h2 className="smallTitle">
-        {title} ({list.length === 0 ? <Loading /> : list.length })
+        {title} <span className="count">({ list.length === 0 ? <Loading /> : list.length })</span>
       </h2>
 
       <ul>

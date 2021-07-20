@@ -1,12 +1,7 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-import { destroyCookie } from 'nookies';
+import nookies from 'nookies';
 
 export default function LogoutPage() {
-  const router = useRouter();
-
-  destroyCookie(null, 'cookieName')
-
   return (
     <main style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <div className="loginScreen">
@@ -37,4 +32,12 @@ export default function LogoutPage() {
       </div>
     </main>
   )
+}
+
+export async function getServerSideProps(ctx) {
+  nookies.destroy(ctx, 'USER_TOKEN');
+
+  return {
+    props: {},
+  }
 }
