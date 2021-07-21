@@ -22,10 +22,15 @@ margin-bottom: 10px;
   margin-bottom: 20px;
 }
 .smallTitle {
-  margin-bottom: 20px;
   font-size: 16px;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.gray1};
+  margin-bottom: 20px;
+}
+.bioTitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: ${({ theme }) => theme.colors.gray3};
   margin-bottom: 20px;
 }
 hr {

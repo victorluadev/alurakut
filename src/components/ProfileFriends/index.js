@@ -1,7 +1,7 @@
 import React from 'react';
 import Loading from '../Loading';
 
-export function ProfileFriends({ title, list }) {
+export function ProfileFriends({ title, list, page }) {
   return (
     <>
       <h2 className="smallTitle">
@@ -13,7 +13,7 @@ export function ProfileFriends({ title, list }) {
           if(index <= 5){
             return (
               <li key={index}>
-                <a href={`${item.html_url}`}>
+                <a href={ page === 'profile' ? `users/${item.login}` : `${item.login}`}>
                   <img src={`https://github.com/${item.login}.png`} />
                   <span>{item.login}</span>
                 </a>

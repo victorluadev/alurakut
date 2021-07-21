@@ -35,9 +35,31 @@ export default function LogoutPage() {
 }
 
 export async function getServerSideProps(ctx) {
-  nookies.destroy(ctx, 'USER_TOKEN');
+  const cookies = nookies.get(ctx)
+  const token = cookies.USER_TOKEN;
 
+  const { isAuthenticated } = await fetch('https://alurakut.vercel.app/api/auth', {
+    headers: {
+        Authorization: token
+      }
+  })
+  .then((response) => response.json())
+
+  if(!isAuthenticated) {
+
+    nookies.destroy(ctx, 'USER_TOKEN');
+
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      }
+    }
+  }
+
+  nookies.destroy(ctx, 'USER_TOKEN');
+  
   return {
-    props: {},
+    props: {}, 
   }
 }
