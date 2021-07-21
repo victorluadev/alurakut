@@ -154,6 +154,7 @@ export default function Home(props) {
           </ProfileRelationsBoxWrapper>
           <ProfileRelationsBoxWrapper>
             <ProfileFriends 
+              page="profile"
               title="Seguindo"
               list={following}
             />
