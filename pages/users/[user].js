@@ -29,10 +29,10 @@ function ProfileSidebar(props){
 export default function FriendsList(props) {
   const githubUser = props.user;
 
+  const [user, setUser] = useState({});
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
   const [communities, setCommunities] = useState([]);
-  const [user, setUser] = useState({});
 
   useEffect(() => {
     async function handleLoadUserInfo() {
@@ -97,6 +97,7 @@ export default function FriendsList(props) {
               page="friend"
               title="Seguidores"
               list={followers}
+              total={user.followers}
             />
             <hr/>
             <a className="link">Ver todos</a>
@@ -106,6 +107,7 @@ export default function FriendsList(props) {
               page="friend"
               title="Seguindo"
               list={following}
+              total={user.following}
             />
             <hr/>
             <a className="link">Ver todos</a>

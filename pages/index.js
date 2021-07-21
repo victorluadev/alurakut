@@ -32,12 +32,18 @@ function ProfileSidebar(props){
 export default function Home(props) {
   const githubUser = props.githubUser;
 
+  const [user, setUser] = useState({});
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
   const [communities, setCommunities] = useState([]);
 
   useEffect(() => {
     async function handleLoadFollowers() {
+      await fetch(`https://api.github.com/users/${githubUser}`)
+      .then(user => user.json())
+      .then(user => setUser(user))
+      .catch(err => console.log(err));
+
       await fetch(`https://api.github.com/users/${githubUser}/followers`)
       .then(user => user.json())
       .then(user => setFollowers(user))
@@ -105,6 +111,11 @@ export default function Home(props) {
             <h1 className="title">
               Bem vindo(a), {githubUser}
             </h1>
+            { user.bio &&
+              <h2 className="bioTitle">
+                {user.bio}
+              </h2> 
+            }
 
             <OrkutNostalgicIconSet recados="7" fotos="2" videos="7" fas="9" mensagens="4" confiavel="3" legal="3" sexy="2"/>
           </Box>
@@ -148,6 +159,7 @@ export default function Home(props) {
               page="profile"
               title="Seguidores"
               list={followers}
+              total={user.followers}
             />
             <hr/>
             <a className="link">Ver todos</a>
@@ -157,6 +169,7 @@ export default function Home(props) {
               page="profile"
               title="Seguindo"
               list={following}
+              total={user.following}
             />
             <hr/>
             <a className="link">Ver todos</a>

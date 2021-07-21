@@ -1,11 +1,11 @@
 import React from 'react';
 import Loading from '../Loading';
 
-export function ProfileFriends({ title, list, page }) {
+export function ProfileFriends({ title, list, page, total }) {
   return (
     <>
       <h2 className="smallTitle">
-        {title} <span className="count">({ list.length === 0 ? <Loading /> : list.length })</span>
+        {title} <span className="count">({ total === 0 ? <Loading /> : total })</span>
       </h2>
 
       <ul>
